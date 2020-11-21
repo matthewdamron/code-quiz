@@ -66,17 +66,47 @@ var displayChoiceButton = function() {
 
     for (i = 0; i < questions[i].c.length; i++) {
         // create choice button
-        var editButtonEl = document.createElement("button");
-        editButtonEl.textContent = questions[questionIndex].c[i];
-        // editButtonEl.className = "btn edit-btn";
-        // editButtonEl.setAttribute("data-task-id", taskId);
-        buttonContainerEl.appendChild(editButtonEl);
+        var choiceButtonEl = document.createElement("button");
+        choiceButtonEl.textContent = questions[questionIndex].c[i];
+        // choiceButtonEl.className = "btn edit-btn";
+        // choiceButtonEl.setAttribute("data-task-id", taskId);
+        buttonContainerEl.appendChild(choiceButtonEl);
     }
 
     return buttonContainerEl;
 }
 
+var taskButtonHandler = function (event) {
+    // get target elemnt from event
+    var targetEl = event.target;
+    var taskId = targetEl.textContent;
+
+    if (taskId === (questions[questionIndex].a)) {
+        // var taskId = event.target.getAttribute("data-task-id");
+        console.log('you clicked the correct answer');
+    }
+    else {
+        console.log('you clicked the wrong answer');
+    }
+
+    // check if the clicked item is the edit button
+    // if (targetEl.matches(".edit-btn")) {
+    //     // var taskId = event.target.getAttribute("data-task-id");
+    //     editTask(taskId);
+    // }
+
+    // // check if the clicked item is the delete button
+    // else if (targetEl.matches(".delete-btn")) {
+    //     // var taskId = event.target.getAttribute("data-task-id");
+    //     deleteTask(taskId);
+    // }
+}
+
+pageContentEl.addEventListener("click", taskButtonHandler);
+
 displayQuestion();
+
+
 
 
 // TODO: Iterate over the questions array and display each question in a confirmation box
