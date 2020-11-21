@@ -5,6 +5,8 @@ var questionIndex = 0;
 // find the #page-content id and assign it var pageContentEl
 var pageContentEl = document.querySelector("#page-content");
 
+var showResultEl = document.getElementById('show-result');
+
 // setup questions and answers in an array
 var questions = [
     {
@@ -69,8 +71,8 @@ var displayChoiceButton = function() {
         // create choice button
         var choiceButtonEl = document.createElement("button");
         choiceButtonEl.textContent = questions[questionIndex].c[i];
-        // choiceButtonEl.className = "btn edit-btn";
-        // choiceButtonEl.setAttribute("data-task-id", taskId);
+        choiceButtonEl.className = "btn";
+        choiceButtonEl.setAttribute("data-choice-id", i);
         buttonContainerEl.appendChild(choiceButtonEl);
     }
 
@@ -80,14 +82,22 @@ var displayChoiceButton = function() {
 var taskButtonHandler = function (event) {
     // get target elemnt from event
     var targetEl = event.target;
-    var taskId = targetEl.textContent;
+    var choiceId = targetEl.getAttribute("data-choice-id")
+    var taskId = choiceId.textContent;
 
     if (taskId === (questions[questionIndex].a)) {
-        // var taskId = event.target.getAttribute("data-task-id");
-        console.log('you clicked the correct answer');
+        showResultEl.innerHTML = '<h3> Correct! </h3>';
+        var timeInterval = setInterval(function () {
+            showResultEl.textContent = '';
+            clearInterval(timeInterval);
+        }, 1000)
     }
     else {
-        console.log('you clicked the wrong answer');
+        showResultEl.innerHTML = '<h3> Wrong! </h3>';
+        var timeInterval = setInterval(function () {
+            showResultEl.textContent = '';
+            clearInterval(timeInterval);
+        }, 1000)
     }
     
     // find the #page-content id and assign it var pageContentEl
