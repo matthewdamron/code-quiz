@@ -17,12 +17,29 @@
         <h1 class="page-title">HTML, CSS, JS Quiz</h1>
     </header>
 
-    <main class="page-content" id="page-content">
+    <section id="startGameWrapper">
+        <h2 id="startIntro">
+            Try to answer the following code-related questions withing the time limit. Keep in mind that incorrect answers will penalize your score time by 10 seconds!
+        </h2>
+        <button id="start" onclick="startGame()">Start Game</button>
+        <button id="highscore" onclick="highscore()">Highscore</button>
+    </section>
 
-    </main>
+    <section id="highscoreWrapper">
+        
+    </section>
 
-    <section>
-        <h2 id="show-result"></h2>
+    <section id="questions">
+        <h2 id="showQuestion">
+        </h2>
+    </section>
+
+    <section id="showChoices">
+
+    </section>
+
+    <section id="results">
+        <h2 id="showResult"></h2>
     </section>
 
     <!-- load js script file -->

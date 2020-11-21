@@ -2,10 +2,10 @@
 var score = 0;
 var questionIndex = 0;
 
-// find the #page-content id and assign it var pageContentEl
-var pageContentEl = document.querySelector("#page-content");
-
-var showResultEl = document.getElementById('show-result');
+// find the #page-content id and assign it var showChoicesEl
+var showChoicesEl = document.getElementById('showChoices');
+var showQuestionEl = document.getElementById('showQuestion');
+var showResultEl = document.getElementById('showResult');
 
 // setup questions and answers in an array
 var questions = [
@@ -37,29 +37,39 @@ var questions = [
 ]
 
 var displayQuestion = function() {
-    // create list element for my questions
-    var listItemEl = document.createElement("li");
-    listItemEl.id = "list-item";
+    
     // listItemEl.setAttribute("data-task-id", questionIndex);
 
     // create div to hold question info
-    var questionInfoEl = document.createElement("div");
+    // var questionInfoEl = document.createElement("div");
     // questionInfoEl.className = "task-info";
+    console.log(score);
+    startGameWrapper.style.display = "none"
 
-    // add question HTML contect to div
-    questionInfoEl.innerHTML = '<h3>' + questions[questionIndex].q + '</h3>';
+    if (questionIndex < questions.length) {
+        // add question HTML contect to div
+        // questionInfoEl.innerHTML = '<h3>' + questions[questionIndex].q + '</h3>';
+        showQuestionEl.textContent = questions[questionIndex].q;
 
-    // add question to list item
-    listItemEl.appendChild(questionInfoEl);
+        // add question to list item
+        // listItemEl.appendChild(questionInfoEl);
 
-    // create choice buttons for question
-    var buttonActionsEl = displayChoiceButton();
-    // add choice buttons to list
-    listItemEl.appendChild(buttonActionsEl);
+        // create list element for my questions
+        // var listItemEl = document.createElement("li");
+        // listItemEl.id = "list-item";
 
-    // add all items to the list on the pageContentEl
-    pageContentEl.appendChild(listItemEl);
+        // create choice buttons for question
+        var buttonActionsEl = displayChoiceButton();
+        // add choice buttons to list
+        // listItemEl.appendChild(buttonActionsEl);
 
+        // add all items to the list on the showChoicesEl
+        showChoicesEl.appendChild(buttonActionsEl);
+    }
+    else {
+        showQuestionEl.textContent = "";
+        endGame();
+    }
 }
 
 var displayChoiceButton = function() {
@@ -72,7 +82,7 @@ var displayChoiceButton = function() {
         var choiceButtonEl = document.createElement("button");
         choiceButtonEl.textContent = questions[questionIndex].c[i];
         choiceButtonEl.className = "btn";
-        choiceButtonEl.setAttribute("data-choice-id", i);
+        // choiceButtonEl.setAttribute("data-choice-id", questions[questionIndex].a);
         buttonContainerEl.appendChild(choiceButtonEl);
     }
 
@@ -82,25 +92,21 @@ var displayChoiceButton = function() {
 var taskButtonHandler = function (event) {
     // get target elemnt from event
     var targetEl = event.target;
-    var choiceId = targetEl.getAttribute("data-choice-id")
-    var taskId = choiceId.textContent;
+    
+    // var choiceId = targetEl.getAttribute("data-choice-id")
+    var choiceId = targetEl.textContent;
+    // var taskId = choiceId.textContent;
 
-    if (taskId === (questions[questionIndex].a)) {
-        showResultEl.innerHTML = '<h3> Correct! </h3>';
-        var timeInterval = setInterval(function () {
-            showResultEl.textContent = '';
-            clearInterval(timeInterval);
-        }, 1000)
+    if (targetEl.matches(".btn")) {
+        checkAnswer(choiceId);
     }
     else {
-        showResultEl.innerHTML = '<h3> Wrong! </h3>';
-        var timeInterval = setInterval(function () {
-            showResultEl.textContent = '';
-            clearInterval(timeInterval);
-        }, 1000)
+        return false;
     }
+
     
-    // find the #page-content id and assign it var pageContentEl
+    
+    // find the #page-content id and assign it var showChoicesEl
     var taskSelected = document.getElementById("list-item");
     // taskSelected.parentNode.removeChild(taskSelected);
     
@@ -125,15 +131,52 @@ var taskButtonHandler = function (event) {
     // }
 }
 
-var deleteTask = function() {
-    // select the task for deletion
-    var taskSelected = document.querySelector(".task-item[data-task-id='" + questionIndex + "']");
-    taskSelected.remove();
-};
+var checkAnswer = function (choiceId) {
+    if (choiceId === (questions[questionIndex].a)) {
+        showResultEl.textContent = 'Correct!';
+        score = score + 5;
+        var timeInterval = setInterval(function () {
+            showResultEl.textContent = '';
+            clearInterval(timeInterval);
+        }, 1000)
+    }
+    else {
+        showResultEl.textContent = 'Wrong!';
+        score = score - 3;
+        var timeInterval = setInterval(function () {
+            showResultEl.textContent = '';
+            clearInterval(timeInterval);
+        }, 1000)
+    }
+}
 
-pageContentEl.addEventListener("click", taskButtonHandler);
+var startGame = function() {
+    displayQuestion();
+}
 
-displayQuestion();
+var endGame = function() {
+    alert('You sore is ' + score);
+}
+
+var highscore = function() {
+    // create list element for my questions
+    var listItemEl = document.createElement("li");
+    listItemEl.id = "list-item";
+
+    var listItem
+
+    // create choice buttons for question
+    var buttonActionsEl = displayChoiceButton();
+    // add choice buttons to list
+    listItemEl.appendChild(buttonActionsEl);
+
+    // add all items to the list on the showChoicesEl
+    showChoicesEl.appendChild(listItemEl);
+}
+
+showChoicesEl.addEventListener("click", taskButtonHandler);
+
+
 
 
 
