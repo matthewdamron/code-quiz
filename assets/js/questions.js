@@ -37,7 +37,8 @@ var questions = [
 var displayQuestion = function() {
     // create list element for my questions
     var listItemEl = document.createElement("li");
-    // listItemEl.className = "task-item";
+    listItemEl.id = "list-item";
+    // listItemEl.setAttribute("data-task-id", questionIndex);
 
     // create div to hold question info
     var questionInfoEl = document.createElement("div");
@@ -88,6 +89,18 @@ var taskButtonHandler = function (event) {
     else {
         console.log('you clicked the wrong answer');
     }
+    
+    // find the #page-content id and assign it var pageContentEl
+    var taskSelected = document.getElementById("list-item");
+    // taskSelected.parentNode.removeChild(taskSelected);
+    
+    taskSelected.remove();
+
+    questionIndex++;
+    
+
+
+    displayQuestion();
 
     // check if the clicked item is the edit button
     // if (targetEl.matches(".edit-btn")) {
@@ -101,6 +114,12 @@ var taskButtonHandler = function (event) {
     //     deleteTask(taskId);
     // }
 }
+
+var deleteTask = function() {
+    // select the task for deletion
+    var taskSelected = document.querySelector(".task-item[data-task-id='" + questionIndex + "']");
+    taskSelected.remove();
+};
 
 pageContentEl.addEventListener("click", taskButtonHandler);
 
