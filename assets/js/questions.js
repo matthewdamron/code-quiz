@@ -45,7 +45,7 @@ var startGame = function() {
 }
 
 var displayQuestion = function() {
-    
+
 
     console.log(score);
     startGameWrapper.style.display = "none"
