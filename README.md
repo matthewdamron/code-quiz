@@ -27,7 +27,7 @@ THEN I can save my initials and score<br>
 
 ![Demo](assets/images/codequizscreenshot.png)
 ![Demo](assets/images/codequizscreenshot2.png)
-![Demo](assets/images/codequizscreenshot2.png)
+![Demo](assets/images/codequizscreenshot3.png)
 
 ## Badges
 
