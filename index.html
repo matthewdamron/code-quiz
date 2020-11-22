@@ -21,24 +21,31 @@
         <h2 id="startIntro">
             Try to answer the following code-related questions withing the time limit. Keep in mind that incorrect answers will penalize your score time by 10 seconds!
         </h2>
-        <button id="start" onclick="startGame()">Start Game</button>
-        <button id="highscore" onclick="highscore()">Highscore</button>
+        <button id="start-btn" onclick="startGame()">Start Game</button>
+        <button id="highscore-btn" onclick="showHighscore()">Highscore</button>
+    </section>
+
+    <section id="showHighscoreWrapper">
+        <h2>Highscores</h2>
     </section>
 
     <section id="highscoreWrapper">
+        <h2>All Done!</h2>
+        <h3 id="highscore"></h3>
+        <lable for="name">Enter your initials:</lable>
+        <input type="text" placeholder="" name="name" id="highscoreNameId" />
+        <button id="submit" onclick="saveHighscore()">Submit</button>
+    </section>
+
+    <section id="questionWrapper">
+        <h2 id="showQuestion"></h2>
+    </section>
+
+    <section id="choicesWrapper">
 
     </section>
 
-    <section id="questionsWrapper">
-        <h2 id="showQuestion">
-        </h2>
-    </section>
-
-    <section id="showChoicesWrapper">
-
-    </section>
-
-    <section id="resultsWrapper">
+    <section id="resultWrapper">
         <h2 id="showResult"></h2>
     </section>
 

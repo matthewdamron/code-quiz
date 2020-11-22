@@ -1,9 +1,10 @@
 // setup score and questionIndex
 var score = 0;
 var questionIndex = 0;
+var highscoreLocal = [];
 
 // find the #page-content id and assign it var showChoicesEl
-var showChoicesEl = document.getElementById('showChoices');
+var showChoicesEl = document.getElementById('choicesWrapper');
 var showQuestionEl = document.getElementById('showQuestion');
 var showResultEl = document.getElementById('showResult');
 
@@ -59,22 +60,23 @@ var displayQuestion = function() {
         // listItemEl.id = "list-item";
 
         // create choice buttons for question
-        var buttonActionsEl = displayChoiceButton();
+        var choiceButtonActionsEl = displayChoiceButton();
         // add choice buttons to list
-        // listItemEl.appendChild(buttonActionsEl);
+        // listItemEl.appendChild(choiceButtonActionsEl);
 
         // add all items to the list on the showChoicesEl
-        showChoicesEl.appendChild(buttonActionsEl);
+        showChoicesEl.appendChild(choiceButtonActionsEl);
     }
     else {
+        showQuestionEl.textContent = "";
         endGame();
     }
 }
 
 var displayChoiceButton = function() {
     // create div for the choice buttons
-    var buttonContainerEl = document.createElement("div");
-    // buttonContainerEl.className = "task-actions";
+    var choiceButtonContainerEl = document.createElement("div");
+    choiceButtonContainerEl.id = "choiceButtonContainer";
 
     for (i = 0; i < questions[i].c.length; i++) {
         // create choice button
@@ -82,10 +84,10 @@ var displayChoiceButton = function() {
         choiceButtonEl.textContent = questions[questionIndex].c[i];
         choiceButtonEl.className = "btn";
         // choiceButtonEl.setAttribute("data-choice-id", questions[questionIndex].a);
-        buttonContainerEl.appendChild(choiceButtonEl);
+        choiceButtonContainerEl.appendChild(choiceButtonEl);
     }
 
-    return buttonContainerEl;
+    return choiceButtonContainerEl;
 }
 
 var taskButtonHandler = function (event) {
@@ -106,10 +108,10 @@ var taskButtonHandler = function (event) {
     
     
     // find the #page-content id and assign it var showChoicesEl
-    var taskSelected = document.getElementById("list-item");
+    // var taskSelected = document.getElementById("list-item");
     // taskSelected.parentNode.removeChild(taskSelected);
-    
-    taskSelected.remove();
+    document.getElementById("choiceButtonContainer").remove();
+    // taskSelected.remove();
 
     questionIndex++;
     
@@ -154,29 +156,30 @@ var startGame = function() {
 }
 
 var endGame = function() {
-    startGameWrapper.style.display = "none"
-    questionsGameWrapper.style.display = "none"
-
-
-    alert('You sore is ' + score);
+    highscoreWrapper.style.display = "inline";
+    var highscore = document.getElementById('highscore');
+    highscore.textContent = 'Your finial score is ' + score + '!';
 }
 
-var highscore = function() {
-    // create list element for my questions
-    var listItemEl = document.createElement("li");
-    listItemEl.id = "list-item";
+var saveHighscore = function() {
+    var highscoreNameEl = document.getElementById('highscoreNameId');
+    var highscoreName = highscoreNameEl.value;
+    console.log(highscoreName);
+    // highscoreLocal.push()
+    localStorage.setItem("Name", highscoreName);
+    localStorage.setItem("Score", score.toString());
 
-    var listItem
-
-    // create choice buttons for question
-    var buttonActionsEl = displayChoiceButton();
-    // add choice buttons to list
-    listItemEl.appendChild(buttonActionsEl);
-
-    // add all items to the list on the showChoicesEl
-    showChoicesEl.appendChild(listItemEl);
 }
 
+var showHighscore = function() {
+    startGameWrapper.style.display = "none";
+    questionWrapper.style.display = "none";
+    highscoreWrapper.style.display = "none";
+    showHighscoreWrapper.style.display = "inline";
+}
+
+showHighscoreWrapper.style.display = "none";
+highscoreWrapper.style.display = "none";
 showChoicesEl.addEventListener("click", taskButtonHandler);
 
 
