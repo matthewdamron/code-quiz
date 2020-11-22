@@ -1,7 +1,7 @@
 // setup score and questionIndex
 var score = 0;
 var questionIndex = 0;
-var highscoreLocal = [];
+var highscoreArray = [];
 
 // find the #page-content id and assign it var showChoicesEl
 var showChoicesEl = document.getElementById('choicesWrapper');
@@ -37,13 +37,15 @@ var questions = [
     }
 ]
 
+var startGame = function() {
+    highscoreArray = [];
+    loadHighscore();
+    displayQuestion();
+}
+
 var displayQuestion = function() {
     
-    // listItemEl.setAttribute("data-task-id", questionIndex);
 
-    // create div to hold question info
-    // var questionInfoEl = document.createElement("div");
-    // questionInfoEl.className = "task-info";
     console.log(score);
     startGameWrapper.style.display = "none"
 
@@ -52,12 +54,6 @@ var displayQuestion = function() {
         // questionInfoEl.innerHTML = '<h3>' + questions[questionIndex].q + '</h3>';
         showQuestionEl.textContent = questions[questionIndex].q;
 
-        // add question to list item
-        // listItemEl.appendChild(questionInfoEl);
-
-        // create list element for my questions
-        // var listItemEl = document.createElement("li");
-        // listItemEl.id = "list-item";
 
         // create choice buttons for question
         var choiceButtonActionsEl = displayChoiceButton();
@@ -105,31 +101,11 @@ var taskButtonHandler = function (event) {
         return false;
     }
 
-    
-    
-    // find the #page-content id and assign it var showChoicesEl
-    // var taskSelected = document.getElementById("list-item");
-    // taskSelected.parentNode.removeChild(taskSelected);
     document.getElementById("choiceButtonContainer").remove();
-    // taskSelected.remove();
 
     questionIndex++;
-    
-
 
     displayQuestion();
-
-    // check if the clicked item is the edit button
-    // if (targetEl.matches(".edit-btn")) {
-    //     // var taskId = event.target.getAttribute("data-task-id");
-    //     editTask(taskId);
-    // }
-
-    // // check if the clicked item is the delete button
-    // else if (targetEl.matches(".delete-btn")) {
-    //     // var taskId = event.target.getAttribute("data-task-id");
-    //     deleteTask(taskId);
-    // }
 }
 
 var checkAnswer = function (choiceId) {
@@ -151,10 +127,6 @@ var checkAnswer = function (choiceId) {
     }
 }
 
-var startGame = function() {
-    displayQuestion();
-}
-
 var endGame = function() {
     highscoreWrapper.style.display = "inline";
     var highscore = document.getElementById('highscore');
@@ -165,65 +137,50 @@ var saveHighscore = function() {
     var highscoreNameEl = document.getElementById('highscoreNameId');
     var highscoreName = highscoreNameEl.value;
     console.log(highscoreName);
-    // highscoreLocal.push()
-    localStorage.setItem("Name", highscoreName);
-    localStorage.setItem("Score", score.toString());
-
+    var highscoreObj = {
+        name: highscoreName,
+        score: score
+    };
+    highscoreArray.push(highscoreObj);
+    localStorage.setItem("codingQuizHighscores", JSON.stringify(highscoreArray));
 }
 
+var loadHighscore = function() {
+    // retreve the tasks from localStorage
+    var savedCodingQuizHighscore = localStorage.getItem("codingQuizHighscores");
+
+    // check if the tasks is null is so return false to exit the function
+    if (!savedCodingQuizHighscore) {
+        return false;
+    }
+
+    // convert the tasks from a stringify format to array format
+    savedCodingQuizHighscore = JSON.parse(savedCodingQuizHighscore);
+
+    for (i = 0; i < savedCodingQuizHighscore.length; i++) {
+        highscoreArray.push(savedCodingQuizHighscore[i]);
+    }
+
+    highscoreArray = highscoreArray.sort(function(a, b){return b.score - a.score});
+    console.log(highscoreArray);
+
+};
+
 var showHighscore = function() {
+    loadHighscore();
     startGameWrapper.style.display = "none";
     questionWrapper.style.display = "none";
     highscoreWrapper.style.display = "none";
     showHighscoreWrapper.style.display = "inline";
 }
 
+function displayCars() {
+    document.getElementById("demo").innerHTML =
+    cars[0].type + " " + cars[0].year + "<br>" +
+    cars[1].type + " " + cars[1].year + "<br>" +
+    cars[2].type + " " + cars[2].year;
+  }
+
 showHighscoreWrapper.style.display = "none";
 highscoreWrapper.style.display = "none";
 showChoicesEl.addEventListener("click", taskButtonHandler);
-
-
-
-
-
-
-// TODO: Iterate over the questions array and display each question in a confirmation box
-// for (var i = 0; i < questions.length; i++) {
-//     var answer = confirm(questions[i].q);
-
-//     if (answer === true && questions[i].a === 't' || answer === false && questions[i].a === 'f') {
-//         score++;
-//         alert('You got the correct answer!');
-//     }
-//     else {
-//         alert('You got the wrong answer!');
-//     }
-// }
-
-
-
-// Renders questions and choices to page: 
-// var displayQuestion = function (questionIndex) {
-//     // Clears existing data 
-//     questionsDiv.innerHTML = "";
-//     ulCreate.innerHTML = "";
-//     // For loops to loop through all info in array
-//     for (var i = 0; i < questions.length; i++) {
-//         // Appends question title only
-//         var userQuestion = questions[questionIndex].title;
-//         var userChoices = questions[questionIndex].choices;
-//         questionsDiv.textContent = userQuestion;
-//     }
-//     // New for each for question choices
-//     userChoices.forEach(function (newItem) {
-//         var listItem = document.createElement("li");
-//         listItem.textContent = newItem;
-//         questionsDiv.appendChild(ulCreate);
-//         ulCreate.appendChild(listItem);
-//         listItem.addEventListener("click", (compare));
-//     })
-// }
-
-// displayQuestion();
-
-// alert('Your final score is ' + score);
