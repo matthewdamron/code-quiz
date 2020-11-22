@@ -12,13 +12,15 @@
 </head>
 
 <body>
+    <!-- header section to show title and countdown timer -->
     <header>
-        <!-- add a web page title -->
         <h1>HTML, CSS, JS Quiz</h1>
         <h3 id="countdown"></h3>
     </header>
 
+    <!-- main section for the quiz -->
     <main>
+        <!-- section before the game starts -->
         <section id="startGameWrapper">
             <h2 id="startIntro">
                 Try to answer the following code-related questions withing the time limit. Keep in mind that incorrect answers will penalize your score time by 10 seconds!
@@ -27,30 +29,31 @@
             <button onclick="showHighscore()">Highscore</button>
         </section>
     
+        <!-- section for the highsscores -->
         <section id="showHighscoreWrapper">
             <h2>Highscores:</h2>
             <div id="sortedHighscores"></div>
             <button id="goBack" onclick="location.reload()">Go Back</button>
             <button id="clearLocalStorage" onclick="clearLocalSotrage()">Clear Highscores</button>
         </section>
-    
-        <section id="highscoreWrapper">
+
+        <!-- section at end of game to save highscore -->
+        <section id="endGameWrapper">
             <h2>All Done!</h2>
-            <h3 id="highscore"></h3>
+            <h3 id="finalGameScore"></h3>
             <lable for="name">Enter your initials:</lable>
-            <input type="text" placeholder="" name="name" id="highscoreNameId" />
+            <input type="text" placeholder="" name="name" id="finalGameName" />
             <button id="submit" type="submit" onclick="saveHighscore()">Submit</button>
         </section>
-    
+
+        <!-- section for asking questions -->
         <section id="questionWrapper">
             <h2 id="showQuestion"></h2>
-        </section>
-    
-        <section id="choicesWrapper">
-        </section>
-    
-        <section id="resultWrapper">
-            <h2 id="showResult"></h2>
+            <section id="choicesWrapper">
+            </section>
+            <section id="resultWrapper">
+                <h2 id="showResult"></h2>
+            </section>
         </section>
     </main>
 

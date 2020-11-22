@@ -12,6 +12,11 @@
     --tertiary-color: #39a6b2;
 }
 
+/* apply style to body */
+body {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
 /* apply styles to <header> */
 header {
     display: flex;
@@ -35,7 +40,6 @@ header h3 {
     font-size: 26px;
     color: var(--primary-color);
 }
-/* end styles to <header> */
 
 /* apply style to main */
 main {
@@ -44,6 +48,7 @@ main {
     margin: auto;
 }
 
+/* apply styles to buttons */
 button {
     display: inline-block;
     height: 38px;
@@ -76,6 +81,7 @@ button:active {
     display: flex;
 }
 
+/* apply styles to list items */
 ol {
     text-align: left;
     display: inline-block;
@@ -88,6 +94,7 @@ li {
     width: 100%;
 }
 
+/* apply styles to input box */
 input[type="text"] {
     height: 38px;
     padding: 6px 10px;
@@ -95,4 +102,25 @@ input[type="text"] {
     border: 1px solid #D1D1D1;
     border-radius: 4px;
     box-shadow: none;
+}
+
+/* apply style to endGame */
+#finalGameScore {
+    margin-top: 10px;
+}
+
+/* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
+@media screen and (max-width: 980px) {
+
+}
+
+/* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
+@media screen and (max-width: 768px) {
+    header h1 {
+        font-size: 26px;
+    }
+    
+    header h3 {
+        font-size: 16px;
+    }
 }
