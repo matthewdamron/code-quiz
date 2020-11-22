@@ -69,13 +69,9 @@ var countdownTimer = function() {
 
 var displayQuestion = function() {
     startGameWrapper.style.display = "none"
-
-    
+  
     if (questionIndex < questions.length) {
-        // add question HTML contect to div
-        // questionInfoEl.innerHTML = '<h3>' + questions[questionIndex].q + '</h3>';
         showQuestionEl.textContent = questions[questionIndex].q;
-
 
         // create choice buttons for question
         var choiceButtonActionsEl = displayChoiceButton();
@@ -207,7 +203,7 @@ var showHighscore = function() {
     
 
     // create list item
-    var listContainerEl = document.createElement('ul');
+    var listContainerEl = document.createElement('ol');
     listContainerEl.id = 'highscoreListContainer';
     
     for (i = 0; i < highscoreArray.length; i++) {

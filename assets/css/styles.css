@@ -1,0 +1,89 @@
+/* remove default browser-enforced styles */
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+/* apply general section styles */
+:root {
+    --primary-color: #fce138;
+    --secondary-color: #024e76;
+    --tertiary-color: #39a6b2;
+}
+
+/* apply styles to <header> */
+header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 20px 35px;
+    background-color: var(--secondary-color);
+    border-bottom: 4px solid var(--primary-color);
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-weight: bold;
+    font-size: 36px;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+header h3 {
+    font-weight: bold;
+    font-size: 26px;
+    color: var(--primary-color);
+}
+/* end styles to <header> */
+
+/* apply style to main */
+main {
+    text-align: center;
+    width: 80%;
+    margin: auto;
+}
+
+button {
+    display: inline-block;
+    height: 38px;
+    line-height: 38px;
+    margin: 20px;
+    padding: 0 30px;
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+    cursor: pointer;
+}
+
+button:hover {
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+}
+
+button:active {
+    border-style: none;
+    border: 0px;
+}
+
+.btn {
+    display: flex;
+}
+
+ol {
+    text-align: left;
+    display: inline-block;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+li {
+    flex: 1;
+    width: 100%;
+}

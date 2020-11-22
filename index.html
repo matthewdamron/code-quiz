@@ -14,44 +14,45 @@
 <body>
     <header>
         <!-- add a web page title -->
-        <h1 class="page-title">HTML, CSS, JS Quiz</h1>
+        <h1>HTML, CSS, JS Quiz</h1>
         <h3 id="countdown"></h3>
     </header>
 
-    <section id="startGameWrapper">
-        <h2 id="startIntro">
-            Try to answer the following code-related questions withing the time limit. Keep in mind that incorrect answers will penalize your score time by 10 seconds!
-        </h2>
-        <button id="start-btn" onclick="startGame()">Start Game</button>
-        <button id="highscore-btn" onclick="showHighscore()">Highscore</button>
-    </section>
-
-    <section id="showHighscoreWrapper">
-        <h2>Highscores:</h2>
-        <div id="sortedHighscores"></div>
-        <button id="goBack" onclick="location.reload()">Go Back</button>
-        <button id="clearLocalStorage" onclick="clearLocalSotrage()">Clear Highscores</button>
-    </section>
-
-    <section id="highscoreWrapper">
-        <h2>All Done!</h2>
-        <h3 id="highscore"></h3>
-        <lable for="name">Enter your initials:</lable>
-        <input type="text" placeholder="" name="name" id="highscoreNameId" />
-        <button id="submit" type="submit" onclick="saveHighscore()">Submit</button>
-    </section>
-
-    <section id="questionWrapper">
-        <h2 id="showQuestion"></h2>
-    </section>
-
-    <section id="choicesWrapper">
-
-    </section>
-
-    <section id="resultWrapper">
-        <h2 id="showResult"></h2>
-    </section>
+    <main>
+        <section id="startGameWrapper">
+            <h2 id="startIntro">
+                Try to answer the following code-related questions withing the time limit. Keep in mind that incorrect answers will penalize your score time by 10 seconds!
+            </h2>
+            <button onclick="startGame()">Start Game</button>
+            <button onclick="showHighscore()">Highscore</button>
+        </section>
+    
+        <section id="showHighscoreWrapper">
+            <h2>Highscores:</h2>
+            <div id="sortedHighscores"></div>
+            <button id="goBack" onclick="location.reload()">Go Back</button>
+            <button id="clearLocalStorage" onclick="clearLocalSotrage()">Clear Highscores</button>
+        </section>
+    
+        <section id="highscoreWrapper">
+            <h2>All Done!</h2>
+            <h3 id="highscore"></h3>
+            <lable for="name">Enter your initials:</lable>
+            <input type="text" placeholder="" name="name" id="highscoreNameId" />
+            <button id="submit" type="submit" onclick="saveHighscore()">Submit</button>
+        </section>
+    
+        <section id="questionWrapper">
+            <h2 id="showQuestion"></h2>
+        </section>
+    
+        <section id="choicesWrapper">
+        </section>
+    
+        <section id="resultWrapper">
+            <h2 id="showResult"></h2>
+        </section>
+    </main>
 
     <!-- load js script file -->
     <script src="./assets/js/questions.js"></script>
