@@ -67,7 +67,6 @@ var displayQuestion = function() {
         showChoicesEl.appendChild(buttonActionsEl);
     }
     else {
-        showQuestionEl.textContent = "";
         endGame();
     }
 }
@@ -155,6 +154,10 @@ var startGame = function() {
 }
 
 var endGame = function() {
+    startGameWrapper.style.display = "none"
+    questionsGameWrapper.style.display = "none"
+
+
     alert('You sore is ' + score);
 }
 
