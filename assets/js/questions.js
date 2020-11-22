@@ -2,12 +2,14 @@
 var score = 0;
 var questionIndex = 0;
 var highscoreArray = [];
+var timeLimit = 80;
 
 // find the #page-content id and assign it var showChoicesEl
 var showChoicesEl = document.getElementById('choicesWrapper');
 var showQuestionEl = document.getElementById('showQuestion');
 var showResultEl = document.getElementById('showResult');
 var sortedHighscoresEl = document.getElementById('sortedHighscores');
+var countdownEl = document.getElementById('countdown');
 
 // setup questions and answers in an array
 var questions = [
@@ -41,15 +43,34 @@ var questions = [
 var startGame = function() {
     highscoreArray = [];
     loadHighscore();
+    countdownTimer();
     displayQuestion();
 }
 
+var countdownTimer = function() {
+    var timeInterval = setInterval(function () {
+        if (timeLimit > 1) {
+            countdownEl.textContent = timeLimit + ' seconds remaining';
+            timeLimit--;
+        }
+        else if (timeLimit === 1) {
+            countdownEl.textContent = timeLimit + ' second remaining';
+            timeLimit--;
+        }
+        else {
+            countdownEl.textContent = '';
+            showQuestionEl.textContent = '';
+            document.getElementById('choiceButtonContainer').remove();
+            clearInterval(timeInterval);
+            endGame();
+        }
+    }, 1000)
+}
+
 var displayQuestion = function() {
-
-
-    console.log(score);
     startGameWrapper.style.display = "none"
 
+    
     if (questionIndex < questions.length) {
         // add question HTML contect to div
         // questionInfoEl.innerHTML = '<h3>' + questions[questionIndex].q + '</h3>';
@@ -112,7 +133,7 @@ var taskButtonHandler = function (event) {
 var checkAnswer = function (choiceId) {
     if (choiceId === (questions[questionIndex].a)) {
         showResultEl.textContent = 'Correct!';
-        score = score + 5;
+        score = score + 7;
         var timeInterval = setInterval(function () {
             showResultEl.textContent = '';
             clearInterval(timeInterval);
@@ -121,6 +142,7 @@ var checkAnswer = function (choiceId) {
     else {
         showResultEl.textContent = 'Wrong!';
         score = score - 3;
+        timeLimit = timeLimit - 10;
         var timeInterval = setInterval(function () {
             showResultEl.textContent = '';
             clearInterval(timeInterval);
@@ -129,6 +151,7 @@ var checkAnswer = function (choiceId) {
 }
 
 var endGame = function() {
+    timeLimit = 0;
     highscoreWrapper.style.display = "inline";
     var highscore = document.getElementById('highscore');
     highscore.textContent = 'Your finial score is ' + score + '!';
