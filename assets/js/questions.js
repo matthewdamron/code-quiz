@@ -7,6 +7,7 @@ var highscoreArray = [];
 var showChoicesEl = document.getElementById('choicesWrapper');
 var showQuestionEl = document.getElementById('showQuestion');
 var showResultEl = document.getElementById('showResult');
+var sortedHighscoresEl = document.getElementById('sortedHighscores');
 
 // setup questions and answers in an array
 var questions = [
@@ -143,9 +144,11 @@ var saveHighscore = function() {
     };
     highscoreArray.push(highscoreObj);
     localStorage.setItem("codingQuizHighscores", JSON.stringify(highscoreArray));
+    showHighscore();
 }
 
 var loadHighscore = function() {
+    highscoreArray = [];
     // retreve the tasks from localStorage
     var savedCodingQuizHighscore = localStorage.getItem("codingQuizHighscores");
 
@@ -164,7 +167,12 @@ var loadHighscore = function() {
     highscoreArray = highscoreArray.sort(function(a, b){return b.score - a.score});
     console.log(highscoreArray);
 
-};
+}
+
+var clearLocalSotrage = function() {
+    localStorage.removeItem('codingQuizHighscores');
+    document.getElementById("highscoreListContainer").remove();
+}
 
 var showHighscore = function() {
     loadHighscore();
@@ -172,15 +180,49 @@ var showHighscore = function() {
     questionWrapper.style.display = "none";
     highscoreWrapper.style.display = "none";
     showHighscoreWrapper.style.display = "inline";
+
+    
+
+    // create list item
+    var listContainerEl = document.createElement('ul');
+    listContainerEl.id = 'highscoreListContainer';
+    
+    for (i = 0; i < highscoreArray.length; i++) {
+        var listItemEl = document.createElement('li');
+        listItemEl.innerHTML = highscoreArray[i].name + " " + highscoreArray[i].score + "<br>";
+        listContainerEl.appendChild(listItemEl);
+    }
+    sortedHighscores.appendChild(listContainerEl);
 }
 
-function displayCars() {
-    document.getElementById("demo").innerHTML =
-    cars[0].type + " " + cars[0].year + "<br>" +
-    cars[1].type + " " + cars[1].year + "<br>" +
-    cars[2].type + " " + cars[2].year;
-  }
+
 
 showHighscoreWrapper.style.display = "none";
 highscoreWrapper.style.display = "none";
 showChoicesEl.addEventListener("click", taskButtonHandler);
+
+
+
+// // add task id as a custom attribute using the taskIdCounter
+// listItemEl.setAttribute("data-task-id", taskIdCounter);
+// // add draggable attribute to the listItemEl
+// listItemEl.setAttribute("draggable", "true");
+
+// // create div to hold task info and add to list item
+// var taskInfoEl = document.createElement("div");
+// taskInfoEl.className = "task-info";
+
+// // add HTML contect to div
+// taskInfoEl.innerHTML = "<h3 class='task-name'>" + taskDataObj.name + "</h3><span class='task-type'>" + taskDataObj.type + "</span>";
+
+// // add taskInfoEl into the HTML
+// listItemEl.appendChild(taskInfoEl);
+
+// // create the task
+// var taskActionsEl = createTaskActions(taskIdCounter);
+// listItemEl.appendChild(taskActionsEl);
+
+// // add taskId to taskDataObj
+// taskDataObj.id = taskIdCounter;
+// // push taskDataObj to task array
+// tasks.push(taskDataObj);
