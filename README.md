@@ -3,8 +3,8 @@ This is a simple coding quiz for HTML, CSS &amp; JS
 
 ## Description
 
-This website will ask qneral questions to test your knowledge.
-1. There are 5 questions that will need to be answered in 80 seconds
+This website will ask general questions to test your knowledge.
+1. There are 15 questions that will need to be answered in 80 seconds
 2. Each question has 4 choices
 3. At the end you can save your score
 4. Compare your score with other
