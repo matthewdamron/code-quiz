@@ -1,8 +1,10 @@
 // setup intital variables
 var score = 0;
+var questions = [];
 var questionIndex = 0;
 var highscoreArray = [];
 var timeLimit = 80;
+
 
 // set variables elements to getElementById
 var showChoicesEl = document.getElementById('choicesWrapper');
@@ -11,8 +13,8 @@ var showResultEl = document.getElementById('showResult');
 var sortedHighscoresEl = document.getElementById('sortedHighscores');
 var countdownEl = document.getElementById('countdown');
 
-// setup questions and answers in an array
-var questions = [
+// setup htmlQuestions and answers in an array
+var htmlQuestions = [
     {
         q: 'What does HTML stand for?',
         c: ['Home Tool Markup Language', 'Hyperlins and Text Markup Language', 'Hyper Text Markup Language', 'Hyper Time Media Language'],
@@ -40,6 +42,62 @@ var questions = [
     }
 ]
 
+var cssQuestions = [
+    {
+        q: 'What does CSS stand for?',
+        c: ['Cascading Style Sheets', 'Creative Style Sheets', 'Computer Style Sheets', 'Colorful Style Sheets'],
+        a: 'Cascading Style Sheets'
+    },
+    {
+        q: 'Which HTML attribute is used to define inline styles?',
+        c: ['font', 'styles', 'class', 'style'],
+        a: 'style'
+    },
+    {
+        q: 'Which is the correct CSS syntax?',
+        c: ['{body:color=black;}', 'body {color:black;}', '{body;color:black}', 'body:color=black;'],
+        a: 'body {color:black;}'
+    },
+    {
+        q: 'How do you insert a comment in a CSS file?',
+        c: ["'this is a comment", '/* this is a comment */', '// this is a comment //', '// this is a comment'],
+        a: '/* this is a comment */'
+    },
+    {
+        q: 'Which CSS property controls the text size?',
+        c: ['text-style', 'text-size', 'font-size', 'font-style'],
+        a: 'text-size'
+    }
+]
+
+var jsQuestions = [
+    {
+        q: 'Inside which HTML element do we put the JavaScript?',
+        c: ['<scripting>', '<js>', '<javascript>', '<script>'],
+        a: '<script>'
+    },
+    {
+        q: '<p id="demo">This is a demonstration.</p>',
+        c: ['document.getElementById("demo").innerHTML = "Hello World!";', 'document.getElementByName("p").innerHTML = "Hello World";', '#demo.innerHTML = "Hello World!";', 'document.getElement("p").innerHTML = "Hello World!";'],
+        a: 'document.getElementById("demo").innerHTML = "Hello World!";'
+    },
+    {
+        q: 'How do you write "Hello World" in an alert box?',
+        c: ['msg("Hello World");', 'alert("Hello World:);', 'alertBox("Hello World");', 'msgBox("Hello World");'],
+        a: 'alert("Hello World");'
+    },
+    {
+        q: 'How to write and IF statment in JavaScript?',
+        c: ['if i = 5 then', 'if i = 5', 'if (i === 5)', 'if i === 5 then'],
+        a: 'if (i === 5)'
+    },
+    {        
+        q: 'How does a FOR loop start?',
+        c: ['for (i = 0; i <= 5; i++)', 'for i = 1 = 5', 'for (i <= 5; i++)', 'for (i = 0; i <= 5)'],
+        a: 'for (i = 0; i <= 5; i++)'
+    }
+]
+
 // show only the startGameWrapper section
 startGameWrapper.style.display = 'inline-block';
 showHighscoreWrapper.style.display = 'none';
@@ -47,6 +105,12 @@ endGameWrapper.style.display = 'none';
 questionWrapper.style.display = 'none';
 
 var startGame = function() {
+    // concat all the question arrays into one and suffle them
+    questions = [];
+    questions = htmlQuestions.concat(cssQuestions, jsQuestions);
+    shuffle(questions);
+    console.log(questions);
+    
     // reset the highscoreArray to empty
     highscoreArray = [];
     // start the timer
@@ -283,6 +347,21 @@ var showHighscore = function() {
 
     // add the list of highscores into the listContainerEl
     sortedHighscoresEl.appendChild(listContainerEl);
+}
+
+var shuffle = function (array) {
+    var newarr=[]
+    var currentIndex = array.length, temporaryValue, randomIndex;
+    while (0 !== currentIndex) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        newarr[currentIndex] = array[randomIndex]
+        array[randomIndex] = temporaryValue;
+    }
+
+    return newarr;
 }
 
 // addEventListener to listen to click on questions

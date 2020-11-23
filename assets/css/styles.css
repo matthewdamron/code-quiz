@@ -51,17 +51,15 @@ main {
 /* apply styles to buttons */
 button {
     display: inline-block;
-    height: 38px;
     line-height: 38px;
     margin: 20px auto;
     padding: 0 30px;
     color: var(--primary-color);
     background-color: var(--secondary-color);
     text-align: center;
-    font-size: 12px;
+    font-size: 18px;
     font-weight: 600;
     letter-spacing: .1rem;
-    text-transform: uppercase;
     border-radius: 6px;
     border: 1px solid #bbb;
     cursor: pointer;
@@ -85,7 +83,7 @@ button:active {
 ol {
     text-align: left;
     display: inline-block;
-    font-size: 20px;
+    font-size: 18px;
     margin-top: 10px;
 }
 
@@ -111,7 +109,9 @@ input[type="text"] {
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
 @media screen and (max-width: 980px) {
-
+    button {
+        line-height: 28px;
+    }
 }
 
 /* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
